@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\Administration\Actions\RegisterChampion;
+namespace App\Domain\Administration\Action\RegisterChampion;
 
 use App\Domain\Administration\Entity\Champion;
 use App\Domain\Administration\Exception\ChampionIdentityAlreadyUsed;

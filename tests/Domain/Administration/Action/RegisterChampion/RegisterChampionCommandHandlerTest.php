@@ -2,8 +2,8 @@
 
 namespace App\Tests\Domain\Administration\Actions\RegisterChampion;
 
-use App\Domain\Administration\Actions\RegisterChampion\RegisterChampionCommand;
-use App\Domain\Administration\Actions\RegisterChampion\RegisterChampionCommandHandler;
+use App\Domain\Administration\Action\RegisterChampion\RegisterChampionCommand;
+use App\Domain\Administration\Action\RegisterChampion\RegisterChampionCommandHandler;
 use App\Domain\Administration\Exception\ChampionIdentityAlreadyUsed;
 use App\Domain\Administration\Repository\ChampionRepository;
 use App\Domain\Administration\ValueObject\ChampionAbilities;
