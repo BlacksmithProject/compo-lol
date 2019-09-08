@@ -33,7 +33,7 @@ final class VersionNumber
      *
      * Compares major, then minor, then patch.
      */
-    public function isNewerThan(self $versionToCompareWith): bool
+    public function isNewerThan(VersionNumber $versionToCompareWith): bool
     {
         if ($this->getMajor($this) !== $this->getMajor($versionToCompareWith)) {
             return $this->getMajor($this) > $this->getMajor($versionToCompareWith);
@@ -55,17 +55,17 @@ final class VersionNumber
         return $this->value;
     }
 
-    private function getMajor(self $version): int
+    private function getMajor(VersionNumber $version): int
     {
         return (int) explode('.', $version->__toString())[0];
     }
 
-    private function getMinor(self $version): int
+    private function getMinor(VersionNumber $version): int
     {
         return (int) explode('.', $version->__toString())[1];
     }
 
-    private function getPatch(self $version): int
+    private function getPatch(VersionNumber $version): int
     {
         return (int) explode('.', $version->__toString())[2];
     }
