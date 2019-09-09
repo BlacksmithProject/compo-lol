@@ -49,32 +49,32 @@ final class VersionNumberTest extends TestCase
 
     public function test that an higher minor version is more recent(): void
     {
-        $versionNumber = new VersionNumber('1.2.0');
-        $versionNumberToCompareWith = new VersionNumber('1.1.0');
+        $versionNumber = new VersionNumber('0.2.0');
+        $versionNumberToCompareWith = new VersionNumber('0.1.0');
 
         $this->assertTrue($versionNumber->isNewerThan($versionNumberToCompareWith));
     }
 
     public function test that an higher patch version is more recent(): void
     {
-        $versionNumber = new VersionNumber('1.1.2');
-        $versionNumberToCompareWith = new VersionNumber('1.1.1');
+        $versionNumber = new VersionNumber('0.0.2');
+        $versionNumberToCompareWith = new VersionNumber('0.0.1');
 
         $this->assertTrue($versionNumber->isNewerThan($versionNumberToCompareWith));
     }
 
     public function test that an higher major version with a lower minor version is more recent(): void
     {
-        $versionNumber = new VersionNumber('2.1.0');
-        $versionNumberToCompareWith = new VersionNumber('1.2.0');
+        $versionNumber = new VersionNumber('2.0.0');
+        $versionNumberToCompareWith = new VersionNumber('1.1.1');
 
         $this->assertTrue($versionNumber->isNewerThan($versionNumberToCompareWith));
     }
 
     public function test that an higher minor version with a lower patch version is more recent(): void
     {
-        $versionNumber = new VersionNumber('1.3.0');
-        $versionNumberToCompareWith = new VersionNumber('1.2.1');
+        $versionNumber = new VersionNumber('0.2.0');
+        $versionNumberToCompareWith = new VersionNumber('0.1.1');
 
         $this->assertTrue($versionNumber->isNewerThan($versionNumberToCompareWith));
     }
