@@ -13,6 +13,7 @@ final class CommandBus implements IExecuteCommands
 
     /**
      * @throws CommandHandlerNotFound
+     * @throws MissingInvokeOnCommandHandler
      */
     public function execute($command): void
     {
@@ -20,6 +21,10 @@ final class CommandBus implements IExecuteCommands
 
         if (!isset($this->handlers[$commandClass])) {
             throw new CommandHandlerNotFound();
+        }
+
+        if (!is_callable($this->handlers[$commandClass])) {
+            throw new MissingInvokeOnCommandHandler();
         }
 
         ($this->handlers[$commandClass])($command);

@@ -5,8 +5,11 @@ namespace App\Tests\Application\CommandBus;
 use App\Application\CommandBus\CommandBus;
 use App\Application\CommandBus\CommandHandlerMap;
 use App\Application\CommandBus\CommandHandlerNotFound;
+use App\Application\CommandBus\MissingInvokeOnCommandHandler;
 use App\Tests\Application\CommandBus\Stub\FakeCommand;
 use App\Tests\Application\CommandBus\Stub\FakeCommandHandler;
+use App\Tests\Application\CommandBus\Stub\InvalidFakeCommand;
+use App\Tests\Application\CommandBus\Stub\InvalidFakeCommandHandler;
 use PHPUnit\Framework\TestCase;
 
 final class CommandBusTest extends TestCase
@@ -21,6 +24,18 @@ final class CommandBusTest extends TestCase
         $this->expectException(CommandHandlerNotFound::class);
 
         $commandBus->execute($commandHandlerMap);
+    }
+
+    public function test it cannot execute a command that have an handler without __invoke method()
+    {
+        $command = new InvalidFakeCommand();
+        $handler = new InvalidFakeCommandHandler();
+        $commandHandlerMap = new CommandHandlerMap([\get_class($command) => $handler]);
+        $commandBus = new CommandBus($commandHandlerMap);
+
+        $this->expectException(MissingInvokeOnCommandHandler::class);
+
+        $commandBus->execute($command);
     }
 
     public function test it execute a command()
