@@ -35,38 +35,31 @@ final class VersionNumber
      */
     public function isNewerThan(VersionNumber $versionToCompareWith): bool
     {
-        if ($this->getMajor($this) !== $this->getMajor($versionToCompareWith)) {
-            return $this->getMajor($this) > $this->getMajor($versionToCompareWith);
+        list(
+            $major,
+            $minor,
+            $patch
+            ) = explode('.', $this->value);
+
+        list(
+            $majorToCompareWith,
+            $minorToCompareWith,
+            $patchToCompareWith
+            ) = explode('.', $versionToCompareWith->value);
+
+        if ($major !== $majorToCompareWith) {
+            return $major > $majorToCompareWith;
         }
 
-        if ($this->getMinor($this) !== $this->getMinor($versionToCompareWith)) {
-            return $this->getMinor($this) > $this->getMinor($versionToCompareWith);
+        if ($minor !== $minorToCompareWith) {
+            return $minor > $minorToCompareWith;
         }
 
-        if ($this->getPatch($this) !== $this->getPatch($versionToCompareWith)) {
-            return $this->getPatch($this) > $this->getPatch($versionToCompareWith);
-        }
-
-        return true;
+        return $patch >= $patchToCompareWith;
     }
 
     public function __toString(): string
     {
         return $this->value;
-    }
-
-    private function getMajor(VersionNumber $version): int
-    {
-        return (int) explode('.', $version->__toString())[0];
-    }
-
-    private function getMinor(VersionNumber $version): int
-    {
-        return (int) explode('.', $version->__toString())[1];
-    }
-
-    private function getPatch(VersionNumber $version): int
-    {
-        return (int) explode('.', $version->__toString())[2];
     }
 }
