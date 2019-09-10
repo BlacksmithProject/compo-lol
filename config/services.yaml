@@ -5,6 +5,13 @@ services:
         autowire: true
         autoconfigure: true
 
-    App\:
-        resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+#######################
+#  COMMANDS HANDLERS  #
+#######################
+
+    App\Domain\Administration\Action\RegisterChampion\RegisterChampionCommandHandler:
+        tags:
+            - 'command.handler'
+
+    App\Application\CommandBus\CommandHandlerMap:
+        arguments: [!tagged command.handler]
