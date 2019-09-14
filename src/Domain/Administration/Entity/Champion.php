@@ -4,10 +4,13 @@ namespace App\Domain\Administration\Entity;
 
 use App\Domain\Administration\Event\ChampionRegistered;
 use App\Domain\Administration\ValueObject\ChampionAbilities;
-use App\Domain\Administration\ValueObject\ChampionIdentity;
+use App\Domain\Administration\ValueObject\ChampionId;
+use App\Domain\Administration\ValueObject\ChampionImageUrl;
+use App\Domain\Administration\ValueObject\ChampionName;
 use App\Domain\Administration\ValueObject\ChampionRoles;
 use App\Domain\Administration\ValueObject\ChampionDamageTypes;
 use App\Domain\Administration\ValueObject\ChampionGamePeriodStrengths;
+use App\Domain\Administration\ValueObject\VersionNumber;
 use BSP\EventManager\EventRegistration;
 use BSP\EventManager\IRegisterEvents;
 
@@ -15,8 +18,6 @@ final class Champion implements IRegisterEvents
 {
     use EventRegistration;
 
-    /** @var ChampionIdentity */
-    private $identity;
     /** @var ChampionRoles */
     private $roles;
     /** @var ChampionAbilities */
@@ -25,15 +26,29 @@ final class Champion implements IRegisterEvents
     private $damageType;
     /** @var ChampionGamePeriodStrengths */
     private $gamePeriodStrength;
+    /** @var ChampionId */
+    private $championId;
+    /** @var VersionNumber */
+    private $versionNumber;
+    /** @var ChampionName */
+    private $championName;
+    /** @var ChampionImageUrl */
+    private $championImageUrl;
 
     private function __construct(
-        ChampionIdentity $championIdentity,
+        ChampionId $championId,
+        VersionNumber $versionNumber,
+        ChampionName $championName,
+        ChampionImageUrl $championImageUrl,
         ChampionRoles $championRoles,
         ChampionAbilities $championAbilities,
         ChampionDamageTypes $damageType,
         ChampionGamePeriodStrengths $gamePeriodStrength
     ) {
-        $this->identity = $championIdentity;
+        $this->championId = $championId;
+        $this->versionNumber = $versionNumber;
+        $this->championName = $championName;
+        $this->championImageUrl = $championImageUrl;
         $this->roles = $championRoles;
         $this->abilities = $championAbilities;
         $this->damageType = $damageType;
@@ -41,21 +56,28 @@ final class Champion implements IRegisterEvents
     }
 
     public static function register(
-        ChampionIdentity $championIdentity,
-        ChampionRoles $championRoles,
-        ChampionAbilities $championAbilities,
-        ChampionDamageTypes $damageType,
-        ChampionGamePeriodStrengths $gamePeriodStrength
+        ChampionId $championId,
+        VersionNumber $versionNumber,
+        ChampionName $championName,
+        ChampionImageUrl $championImageUrl
     ): self {
         $champion = new self(
-            $championIdentity,
-            $championRoles,
-            $championAbilities,
-            $damageType,
-            $gamePeriodStrength
+            $championId,
+            $versionNumber,
+            $championName,
+            $championImageUrl,
+            new ChampionRoles(),
+            new ChampionAbilities(),
+            new ChampionDamageTypes(),
+            new ChampionGamePeriodStrengths()
         );
 
-        $champion->recordedEvents[] = new ChampionRegistered($championIdentity->id());
+        $champion->recordedEvents[] = new ChampionRegistered(
+            $championId,
+            $versionNumber,
+            $championName,
+            $championImageUrl
+        );
 
         return $champion;
     }

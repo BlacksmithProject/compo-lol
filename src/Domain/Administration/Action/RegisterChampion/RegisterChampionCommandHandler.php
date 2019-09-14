@@ -20,16 +20,15 @@ final class RegisterChampionCommandHandler
      */
     public function __invoke(RegisterChampionCommand $command): void
     {
-        if ($this->championRepository->isIdAlreadyUsed($command->championIdentity()->id())) {
+        if ($this->championRepository->isIdAlreadyUsed($command->championId())) {
             throw new ChampionIdentityAlreadyUsed();
         }
 
         $champion = Champion::register(
-            $command->championIdentity(),
-            $command->championRoles(),
-            $command->championAbilities(),
-            $command->damageType(),
-            $command->gamePeriodStrength()
+            $command->championId(),
+            $command->versionNumber(),
+            $command->championName(),
+            $command->championImageUrl()
         );
 
         $this->championRepository->add($champion);

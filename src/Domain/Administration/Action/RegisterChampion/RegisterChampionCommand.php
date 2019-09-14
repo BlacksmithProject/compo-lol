@@ -2,61 +2,51 @@
 
 namespace App\Domain\Administration\Action\RegisterChampion;
 
-use App\Domain\Administration\ValueObject\ChampionAbilities;
-use App\Domain\Administration\ValueObject\ChampionIdentity;
-use App\Domain\Administration\ValueObject\ChampionRoles;
-use App\Domain\Administration\ValueObject\ChampionDamageTypes;
-use App\Domain\Administration\ValueObject\ChampionGamePeriodStrengths;
+use App\Domain\Administration\ValueObject\ChampionId;
+use App\Domain\Administration\ValueObject\ChampionImageUrl;
+use App\Domain\Administration\ValueObject\ChampionName;
+use App\Domain\Administration\ValueObject\VersionNumber;
 
 final class RegisterChampionCommand
 {
-    /** @var ChampionIdentity */
-    private $championIdentity;
-    /** @var ChampionRoles */
-    private $championRoles;
-    /** @var ChampionAbilities */
-    private $championAbilities;
-    /** @var ChampionDamageTypes */
-    private $damageType;
-    /** @var ChampionGamePeriodStrengths */
-    private $gamePeriodStrength;
+    /** @var ChampionId */
+    private $championId;
+    /** @var VersionNumber */
+    private $versionNumber;
+    /** @var ChampionName */
+    private $championName;
+    /** @var ChampionImageUrl */
+    private $championImageUrl;
 
     public function __construct(
-        ChampionIdentity $championIdentity,
-        ChampionRoles $championRoles,
-        ChampionAbilities $championAbilities,
-        ChampionDamageTypes $damageType,
-        ChampionGamePeriodStrengths $gamePeriodStrength
+        ChampionId $championId,
+        VersionNumber $versionNumber,
+        ChampionName $championName,
+        ChampionImageUrl $championImageUrl
     ) {
-        $this->championIdentity = $championIdentity;
-        $this->championRoles = $championRoles;
-        $this->championAbilities = $championAbilities;
-        $this->damageType = $damageType;
-        $this->gamePeriodStrength = $gamePeriodStrength;
+        $this->championId = $championId;
+        $this->versionNumber = $versionNumber;
+        $this->championName = $championName;
+        $this->championImageUrl = $championImageUrl;
     }
 
-    public function championIdentity(): ChampionIdentity
+    public function championId(): ChampionId
     {
-        return $this->championIdentity;
+        return $this->championId;
     }
 
-    public function championRoles(): ChampionRoles
+    public function versionNumber(): VersionNumber
     {
-        return $this->championRoles;
+        return $this->versionNumber;
     }
 
-    public function championAbilities(): ChampionAbilities
+    public function championName(): ChampionName
     {
-        return $this->championAbilities;
+        return $this->championName;
     }
 
-    public function damageType(): ChampionDamageTypes
+    public function championImageUrl(): ChampionImageUrl
     {
-        return $this->damageType;
-    }
-
-    public function gamePeriodStrength(): ChampionGamePeriodStrengths
-    {
-        return $this->gamePeriodStrength;
+        return $this->championImageUrl;
     }
 }
