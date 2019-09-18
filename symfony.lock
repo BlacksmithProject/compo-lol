@@ -2,6 +2,9 @@
     "beberlei/assert": {
         "version": "v3.2.1"
     },
+    "blacksmith-project/command-bus": {
+        "version": "v0.4.0"
+    },
     "blacksmith-project/event-manager": {
         "version": "v0.1.0"
     },

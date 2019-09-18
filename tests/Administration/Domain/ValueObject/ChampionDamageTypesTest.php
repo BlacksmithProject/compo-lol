@@ -1,0 +1,18 @@
+<?php declare(strict_types=1);
+
+namespace App\Tests\Administration\Domain\ValueObject;
+
+use App\Administration\Domain\ValueObject\ChampionDamageTypes;
+use App\Administration\Domain\ValueObject\Enum\DamageType;
+use PHPUnit\Framework\TestCase;
+
+final class ChampionDamageTypesTest extends TestCase
+{
+    public function test that champion damage types are set with provided ones(): void
+    {
+        $championDamageTypes = new ChampionDamageTypes(DamageType::PHYSICAL());
+
+        $this->assertTrue($championDamageTypes->isPhysical());
+        $this->assertFalse($championDamageTypes->isMagical());
+    }
+}

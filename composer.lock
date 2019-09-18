@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e4fda86258fb2a6ddc27d11eab4225ac",
+    "content-hash": "a1ce74ef17a0ac3b774645198bf4e5d0",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -60,6 +60,50 @@
                 "validation"
             ],
             "time": "2019-08-23T16:04:58+00:00"
+        },
+        {
+            "name": "blacksmith-project/command-bus",
+            "version": "v0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BlacksmithProject/CommandBus.git",
+                "reference": "40a10f63865c9156427bba3620cdac87ead604ae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BlacksmithProject/CommandBus/zipball/40a10f63865c9156427bba3620cdac87ead604ae",
+                "reference": "40a10f63865c9156427bba3620cdac87ead604ae",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3"
+            },
+            "require-dev": {
+                "escapestudios/symfony2-coding-standard": "^3.4",
+                "infection/infection": "^0.13.6",
+                "mnapoli/pretty": "^1.0",
+                "phpstan/phpstan": "^0.11",
+                "phpunit/phpunit": "^8.1",
+                "squizlabs/php_codesniffer": "^3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BSP\\CommandBus\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Gomes de Oliveira",
+                    "email": "ngdo27@gmail.com"
+                }
+            ],
+            "description": "A PHP Library",
+            "time": "2019-09-18T04:21:55+00:00"
         },
         {
             "name": "blacksmith-project/event-manager",

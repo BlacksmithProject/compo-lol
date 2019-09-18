@@ -9,9 +9,20 @@ services:
 #  COMMANDS HANDLERS  #
 #######################
 
-    App\Domain\Administration\Action\RegisterChampion\RegisterChampionCommandHandler:
+    App\Administration\Domain\Action\RegisterChampion\RegisterChampionCommandHandler:
         tags:
             - 'command.handler'
 
-    App\Application\CommandBus\CommandHandlerMap:
+#######################
+# COMMAND HANDLER MAP #
+#######################
+    BSP\CommandBus\SimpleCommandHandlerMap:
         arguments: [!tagged command.handler]
+
+###############
+# COMMAND BUS #
+###############
+
+    BSP\CommandBus\SimpleCommandBus:
+        arguments:
+            - BSP\CommandBus\SimpleCommandHandlerMap
