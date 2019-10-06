@@ -10,6 +10,8 @@ services:
 #######################
 
     App\Administration\Domain\Action\RegisterChampion\RegisterChampionCommandHandler:
+        arguments:
+            - '@App\BuildingBlocks\Infrastructure\Doctrine\DoctrineEventStore'
         tags:
             - 'command.handler'
 
@@ -25,4 +27,17 @@ services:
 
     BSP\CommandBus\SimpleCommandBus:
         arguments:
-            - BSP\CommandBus\SimpleCommandHandlerMap
+            - '@BSP\CommandBus\SimpleCommandHandlerMap'
+
+#######################
+# SYMFONY EVENT STORE #
+#######################
+    App\BuildingBlocks\Infrastructure\Doctrine\DoctrineEventStore:
+
+###################
+# SYMFONY COMMAND #
+###################
+
+    App\Administration\Infrastructure\Command\TestCommand:
+        arguments:
+            $commandBus: '@BSP\CommandBus\SimpleCommandBus'

@@ -3,12 +3,17 @@
 namespace App\Administration\Domain\Action\RegisterChampion;
 
 use App\Administration\Domain\ValueObject\ChampionId;
+use App\Administration\Domain\ValueObject\ChampionIdentity;
 use App\Administration\Domain\ValueObject\ChampionImageUrl;
 use App\Administration\Domain\ValueObject\ChampionName;
 use App\Administration\Domain\ValueObject\VersionNumber;
+use BSP\CommandBus\Contracts\AggregateId;
+use BSP\CommandBus\Contracts\Command;
 
-final class RegisterChampionCommand
+final class RegisterChampionCommand implements Command
 {
+    /** @var ChampionIdentity */
+    private $championIdentity;
     /** @var ChampionId */
     private $championId;
     /** @var VersionNumber */
@@ -19,15 +24,22 @@ final class RegisterChampionCommand
     private $championImageUrl;
 
     public function __construct(
+        ChampionIdentity $championIdentity,
         ChampionId $championId,
         VersionNumber $versionNumber,
         ChampionName $championName,
         ChampionImageUrl $championImageUrl
     ) {
+        $this->championIdentity = $championIdentity;
         $this->championId = $championId;
         $this->versionNumber = $versionNumber;
         $this->championName = $championName;
         $this->championImageUrl = $championImageUrl;
+    }
+
+    public function aggregateId(): AggregateId
+    {
+        return $this->championIdentity;
     }
 
     public function championId(): ChampionId
